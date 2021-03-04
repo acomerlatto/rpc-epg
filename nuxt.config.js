@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -46,19 +48,49 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/moment',
+    '@nuxtjs/fontawesome'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/dotenv'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+
+  proxy: {
+    '/epg': {
+      target: process.env.EPG_GLOBO_URL,
+      pathRewrite: { '^/epg': `/programmes/${process.env.EPG_RPC_ID}` }
+    }
+  },
+
+  moment: {
+    defaultLocale: 'pt-br',
+    locales: ['pt-br']
+  },
+
+  loading: {
+    color: '#e53e3e',
+    height: '3px'
+  },
+
+  fontawesome: {
+    component: 'fa',
+    icons: {
+      solid: ['faMugHot'],
+      regular: ['faClock']
+    }
+  }
 }
