@@ -9,7 +9,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'rpc-epg',
+    title: 'RPC - EPG',
     htmlAttrs: {
       lang: 'pt_BR'
     },
