@@ -24,9 +24,13 @@
 
       <!--  Mobile  -->
       <img :src="logotipo" alt="Logotipo" class="flex-none object-cover rounded-l w-14 md:hidden">
-      <div class="ml-3 flex flex-wrap content-center md:hidden">
+      <div class="ml-3 flex flex-wrap content-center md:hidden align-middle">
         <span class="text-blue-900 font-bold">
-          <span class="font-normal"><fa :icon="['far', 'clock']" /> {{ horarioInicio }}</span>
+          <span class="font-normal">
+            <ping-no-ar v-if="programaAtual" />
+            <fa v-else :icon="['far', 'clock']" />
+            {{ horarioInicio }}
+          </span>
           {{ programa.title }}
         </span>
       </div>
@@ -41,15 +45,20 @@
 
 import CardModal from '~/components/epg/card-modal'
 import ComputedPrograma from '~/plugins/mixins/epg/programa'
+import PingNoAr from '~/components/elements/ping-no-ar'
 
 export default {
   name: 'Card',
-  components: { CardModal },
+  components: { CardModal, PingNoAr },
   mixins: [ComputedPrograma],
   props: {
     programa: {
       type: Object,
       required: true
+    },
+    programaAtual: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

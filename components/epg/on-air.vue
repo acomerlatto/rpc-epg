@@ -6,10 +6,7 @@
         <div class="w-full sm:ml-2">
           <div class="my-auto flex">
             <div class="flex-auto">
-              <span class="flex h-3 w-3 inline-flex align-middle">
-                <span class="animate-ping absolute rounded-full h-3 w-3 bg-red-400" />
-                <span class="relative rounded-full h-3 w-3 bg-red-600" />
-              </span>
+              <ping-no-ar/>
               <span class="align-middle text-blue-900 font-bold">
                 <span class="text-red-600 font-normal mr-2">No Ar</span>{{ nomePrograma }}
               </span>
@@ -28,8 +25,11 @@
 </template>
 
 <script>
+import PingNoAr from '~/components/elements/ping-no-ar'
+
 export default {
   name: 'EPGOnAir',
+  components: { PingNoAr },
   props: {
     programa: {
       type: Object,

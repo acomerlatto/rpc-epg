@@ -10,7 +10,7 @@
     <app-on-air v-if="noAr && programaAtual" ref="on-air" class="my-8" :programa="programaAtual" />
 
     <div class="mt-6">
-      <app-card-detalhes v-for="(programa, index) in programas" :key="index" :programa="programa" />
+      <app-card-detalhes v-for="(programa, index) in programas" :key="index" :programa="programa" :programaAtual="programa === programaAtual" />
     </div>
   </div>
 </template>
