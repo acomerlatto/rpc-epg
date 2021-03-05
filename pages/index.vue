@@ -2,7 +2,7 @@
   <div class="py-6">
     <div class="mb-6 text-center">
       <img ref="logotipo" class="logotipo" src="/images/logo.png" alt="Logotipo RPC">
-      <h2 class="text-blue-900 text-4xl capitalize font-bold">
+      <h2 class="text-blue-900 text-2xl capitalize font-bold">
         {{ $moment(dataProgramacao, 'YYYY-MM-DD').format('dddd, DD [de] MMMM') }}
       </h2>
     </div>
@@ -10,7 +10,7 @@
     <app-on-air v-if="noAr && programaAtual" ref="on-air" class="my-8" :programa="programaAtual" />
 
     <div class="mt-6">
-      <app-card-detalhes v-for="(programa, index) in epg.programme.entries" :key="index" :programa="programa" />
+      <app-card-detalhes v-for="(programa, index) in programas" :key="index" :programa="programa" />
     </div>
   </div>
 </template>
@@ -26,11 +26,11 @@ export default {
     AppCardDetalhes: Card
   },
   async asyncData ({ $axios, $moment }) {
-    // Retira-se 4 horas pois a programação da Globo/RPC inicia um novo dia às 04:00
-    const dataProgramacao = $moment().subtract(4, 'hours').format('YYYY-MM-DD')
-    const epg = await $axios.$get(`/epg?date=${dataProgramacao}`)
+    const dataProgramacao = $moment()
+    const epgToday = await $axios.$get(`/epg?date=${dataProgramacao.format('YYYY-MM-DD')}`)
+    const epgYesterday = await $axios.$get(`/epg?date=${$moment(dataProgramacao).subtract(1, 'day').format('YYYY-MM-DD')}`)
 
-    return { epg, dataProgramacao }
+    return { epg: epgToday.programme.entries.concat(epgYesterday.programme.entries), dataProgramacao }
   },
   data () {
     return {
@@ -44,6 +44,20 @@ export default {
     }
   },
   computed: {
+    programas () {
+      const $this = this
+      const inicioHoje = $this.$moment().startOf('day')
+      const fimHoje = $this.$moment().endOf('day')
+
+      return this.epg.filter(elemento => $this.$moment.unix(elemento.start_time).isBetween(inicioHoje, fimHoje))
+        .sort(function (a, b) {
+          if (a.start_time < b.start_time) { return -1 }
+
+          if (a.start_time > b.start_time) { return 1 }
+
+          return 0
+        })
+    },
     imagem () {
       return this.programaAtual.custom_info.Graficos.ImagemURL
     },
@@ -53,9 +67,7 @@ export default {
     },
 
     noAr () {
-      const agora = this.$moment().subtract(4, 'hours').format('YYYY-MM-DD')
-
-      return this.dataProgramacao === agora
+      return this.dataProgramacao.isSame(this.$moment(), 'day')
     }
   },
   mounted () {
@@ -66,7 +78,7 @@ export default {
   methods: {
     definirProgramaAtual () {
       const $this = this
-      this.programaAtual = this.epg.programme.entries.find(function (elemento) {
+      this.programaAtual = this.programas.find(function (elemento) {
         const inicio = $this.$moment.unix(elemento.start_time)
         const fim = $this.$moment.unix(elemento.end_time)
 
