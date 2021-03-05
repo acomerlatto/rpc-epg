@@ -7,8 +7,13 @@
         <!-- Titulo -->
         <div class="hover:text-red-600">
           <span class="font-semibold text-blue-900">
-            <span class="text-blue-900"><fa :icon="['far', 'clock']" /> {{ horarioInicio }}</span>
-            {{ programa.title }}</span>
+            <span class="font-normal">
+              <ping-no-ar v-if="programaAtual" />
+              <fa v-else :icon="['far', 'clock']" />
+              {{ horarioInicio }}
+            </span>
+            {{ programa.title }}
+          </span>
         </div>
 
         <!-- Categorias -->
