@@ -7,9 +7,9 @@
           <div class="my-auto flex">
             <div class="flex-auto">
               <ping-no-ar/>
-              <span class="align-middle text-blue-900 font-bold">
+              <p class="inline-flex align-middle text-blue-900 font-bold">
                 <span class="text-red-600 font-normal mr-2">No Ar</span>{{ nomePrograma }}
-              </span>
+              </p>
             </div>
             <div class="flex-auto text-right">
               <span class="align-middle text-red-500">{{ minutosRestantes }} min <span class="hidden md:inline">restante{{ minutosRestantes > 1 ? 's': '' }}</span></span>

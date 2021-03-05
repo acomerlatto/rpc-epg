@@ -5,15 +5,13 @@
       <img :src="imagem" alt="Imagem" class="flex-none object-cover w-56 h-auto hidden md:block md:rounded-l">
       <div class="ml-3 hidden md:flex md:flex-col md:py-2 md:pr-2">
         <!-- Titulo -->
-        <div class="hover:text-red-600">
-          <span class="font-semibold text-blue-900">
-            <span class="font-normal">
-              <ping-no-ar v-if="programaAtual" />
-              <fa v-else :icon="['far', 'clock']" />
-              {{ horarioInicio }}
-            </span>
-            {{ programa.title }}
-          </span>
+        <div>
+          <div v-if="programaAtual" class="inline-flex align-middle">
+            <ping-no-ar />
+          </div>
+          <div class="inline-flex align-middle text-blue-900 font-bold">
+            <p><fa v-if="!programaAtual" :icon="['far', 'clock']" /> <span class="font-normal">{{ horarioInicio }}</span> {{ programa.title }}</p>
+          </div>
         </div>
 
         <!-- Categorias -->
@@ -29,15 +27,13 @@
 
       <!--  Mobile  -->
       <img :src="logotipo" alt="Logotipo" class="flex-none object-cover rounded-l w-14 md:hidden">
-      <div class="ml-3 flex flex-wrap content-center md:hidden align-middle">
-        <span class="text-blue-900 font-bold">
-          <span class="font-normal">
-            <ping-no-ar v-if="programaAtual" />
-            <fa v-else :icon="['far', 'clock']" />
-            {{ horarioInicio }}
-          </span>
-          {{ programa.title }}
-        </span>
+      <div class="ml-3 my-auto flex-auto content-center md:hidden">
+        <div v-if="programaAtual" class="inline-flex align-middle">
+          <ping-no-ar />
+        </div>
+        <div class="inline-flex align-middle text-blue-900 font-bold">
+          <p><fa v-if="!programaAtual" :icon="['far', 'clock']" /> <span class="font-normal">{{ horarioInicio }}</span> {{ programa.title }}</p>
+        </div>
       </div>
     </div>
 
@@ -54,7 +50,10 @@ import PingNoAr from '~/components/elements/ping-no-ar'
 
 export default {
   name: 'Card',
-  components: { CardModal, PingNoAr },
+  components: {
+    CardModal,
+    PingNoAr
+  },
   mixins: [ComputedPrograma],
   props: {
     programa: {
