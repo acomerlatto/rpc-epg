@@ -43,12 +43,12 @@ export default {
     AppOnAir: OnAir,
     AppCardDetalhes: Card
   },
-  async asyncData ({ $axios, $moment }) {
+  async asyncData ({ $axios, $moment, $_ }) {
     const dataProgramacao = $moment()
     const epgInicial = await $axios.$get(`/epg?date=${dataProgramacao.format('YYYY-MM-DD')}`)
     const epgFinal = await $axios.$get(`/epg?date=${$moment(dataProgramacao).subtract(1, 'day').format('YYYY-MM-DD')}`)
 
-    return { epg: epgInicial.programme.entries.concat(epgFinal.programme.entries), dataProgramacao }
+    return { epg: $_.concat(epgInicial.programme.entries, epgFinal.programme.entries), dataProgramacao }
   },
   data () {
     return {
@@ -67,14 +67,10 @@ export default {
       const inicioHoje = $this.$moment(this.dataProgramacao).startOf('day')
       const fimHoje = $this.$moment(this.dataProgramacao).endOf('day')
 
-      return this.epg.filter(elemento => $this.$moment.unix(elemento.start_time).isBetween(inicioHoje, fimHoje))
-        .sort(function (a, b) {
-          if (a.start_time < b.start_time) { return -1 }
-
-          if (a.start_time > b.start_time) { return 1 }
-
-          return 0
-        })
+      let epg = this.epg
+      epg = this.$_.filter(epg, elemento => $this.$moment.unix(elemento.start_time).isBetween(inicioHoje, fimHoje))
+      epg = this.$_.orderBy(epg, ['start_time'])
+      return this.$_.uniqBy(epg, 'start_time')
     },
 
     noAr () {
