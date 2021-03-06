@@ -82,11 +82,17 @@ export default {
     }
   },
   mounted () {
-    this.definirProgramaAtual()
-
-    this.timer = setInterval(this.definirProgramaAtual, 1000)
+    this.fazerLeituraPrograma()
   },
   methods: {
+    fazerLeituraPrograma () {
+      this.timer = setInterval(this.definirProgramaAtual, 1000)
+      this.definirProgramaAtual()
+    },
+    cancelarLeituraPrograma () {
+      clearInterval(this.timer)
+      this.programaAtual = this.timer = null
+    },
     definirProgramaAtual () {
       const $this = this
       this.programaAtual = this.programas.find(function (elemento) {
@@ -102,6 +108,7 @@ export default {
 
       this.dataProgramacao = data
       this.epg = epgInicial.programme.entries.concat(epgFinal.programme.entries)
+      return this.noAr ? this.fazerLeituraPrograma() : this.cancelarLeituraPrograma()
     }
   }
 }
