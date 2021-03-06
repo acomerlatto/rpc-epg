@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed z-10 inset-0 overflow-y-auto">
+  <div class="fixed z-20 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center w-full h-full">
       <div class="inline-block align-bottom bg-white text-left overflow-hidden align-middle w-full h-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
         <div class="absolute top-0 right-0 h-10">

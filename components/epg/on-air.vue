@@ -61,7 +61,7 @@ export default {
     calcularProgresso () {
       const fracaoProgresso = this.$moment.duration(this.programa.duration_in_minutes, 'minutes').asMilliseconds() / 100
 
-      const agora = new Date().getTime()
+      const agora = this.$moment().utc()
       const inicioPrograma = this.$moment.unix(this.programa.start_time).utc()
       const fimPrograma = this.$moment.unix(this.programa.end_time).utc()
 
@@ -88,6 +88,6 @@ export default {
 }
 
 .ao-vivo.on-top {
-  @apply w-full fixed top-0
+  @apply w-full fixed top-0 z-10
 }
 </style>
