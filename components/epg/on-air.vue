@@ -2,7 +2,7 @@
   <div ref="onAir">
     <div class="ao-vivo" :class="{ 'on-body': !topFixed, 'on-top': topFixed }">
       <div class="flex w-full mx-auto" :class="{'md:w-10/12': topFixed, 'lg:w-2/3': topFixed, 'xl:w-1/2': topFixed}">
-        <img :src="logotipoUrl" alt="Logotipo Agora" class="w-10 hidden sm:block">
+        <img :src="logotipo" alt="Logotipo Agora" class="w-10 hidden sm:block">
         <div class="w-full sm:ml-2">
           <div class="my-auto flex">
             <div class="flex-auto">
@@ -26,10 +26,12 @@
 
 <script>
 import PingNoAr from '~/components/elements/ping-no-ar'
+import ComputedPrograma from '~/plugins/mixins/epg/programa'
 
 export default {
   name: 'EPGOnAir',
   components: { PingNoAr },
+  mixins: [ComputedPrograma],
   props: {
     programa: {
       type: Object,
@@ -42,17 +44,6 @@ export default {
       minutosRestantes: 0,
       barraDeProgresso: 0,
       topFixed: false
-    }
-  },
-  computed: {
-    horarioInicio () {
-      return this.$moment.unix(this.programa.start_time).format('HH:mm')
-    },
-    logotipoUrl () {
-      return this.programa.custom_info.Graficos.LogoURL
-    },
-    nomePrograma () {
-      return this.programa.title
     }
   },
   mounted () {

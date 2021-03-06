@@ -10,7 +10,7 @@
             <ping-no-ar />
           </div>
           <div class="inline-flex align-middle text-blue-900 font-bold">
-            <p><fa v-if="!programaAtual" :icon="['far', 'clock']" /> <span class="font-normal">{{ horarioInicio }}</span> {{ programa.title }}</p>
+            <p><fa v-if="!programaAtual" :icon="['far', 'clock']" /> <span class="font-normal">{{ horarioInicio }}</span> {{ nomePrograma }}</p>
           </div>
         </div>
 
@@ -21,7 +21,7 @@
 
         <!-- Descrição -->
         <div class="text-sm break-words hidden md:block">
-          {{ programa.description }}
+          {{ descricaoPrograma }}
         </div>
       </div>
 
@@ -32,7 +32,7 @@
           <ping-no-ar />
         </div>
         <div class="inline-flex align-middle text-blue-900 font-bold">
-          <p><fa v-if="!programaAtual" :icon="['far', 'clock']" /> <span class="font-normal">{{ horarioInicio }}</span> {{ programa.title }}</p>
+          <p><fa v-if="!programaAtual" :icon="['far', 'clock']" /> <span class="font-normal">{{ horarioInicio }}</span> {{ nomePrograma }}</p>
         </div>
       </div>
     </div>

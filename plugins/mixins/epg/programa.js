@@ -11,6 +11,12 @@ export default {
     },
     categoria () {
       return this.programa.program.category
+    },
+    nomePrograma () {
+      return this.programa.title
+    },
+    descricaoPrograma () {
+      return this.programa.description
     }
   }
 }
