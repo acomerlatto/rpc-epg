@@ -64,11 +64,24 @@ export default {
   computed: {
     programas () {
       const $this = this
-      const inicioHoje = $this.$moment(this.dataProgramacao).startOf('day')
-      const fimHoje = $this.$moment(this.dataProgramacao).endOf('day')
+      const inicioHoje = this.$moment(this.dataProgramacao).startOf('day')
+      const fimHoje = this.$moment(this.dataProgramacao).endOf('day')
+      const agora = this.$moment()
+
+      const filter = function (el) {
+        const inicio = $this.$moment.unix(el.start_time)
+        const fim = $this.$moment.unix(el.end_time)
+
+        // Filtrar os programas de hoje
+        const gradeHoje = inicio.isBetween(inicioHoje, fimHoje)
+        // Filtrar o programa que iniciou antes da meia noite e termina após a meia noite
+        const noAr = agora.isBetween(inicio, fim) && agora.isSame(fim, 'day')
+
+        return gradeHoje || noAr
+      }
 
       let epg = this.epg
-      epg = this.$_.filter(epg, elemento => $this.$moment.unix(elemento.start_time).isBetween(inicioHoje, fimHoje))
+      epg = this.$_.filter(epg, filter)
       epg = this.$_.orderBy(epg, ['start_time'])
       return this.$_.uniqBy(epg, 'start_time')
     },

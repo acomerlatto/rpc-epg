@@ -6,7 +6,7 @@
         <div class="w-full sm:ml-2">
           <div class="my-auto flex">
             <div class="flex-auto">
-              <ping-no-ar/>
+              <ping-no-ar />
               <p class="inline-flex align-middle text-blue-900 font-bold">
                 <span class="text-red-600 font-normal mr-2">No Ar</span>{{ nomePrograma }}
               </p>
