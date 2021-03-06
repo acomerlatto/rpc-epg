@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/acomerlatto/rpc-epg/compare/v1.0.0...v1.1.0) (2021-03-06)
+
+
+### Features
+
+* corrige o posicionamento no eixo z da barra no-ar e do modal para mobile ([221c701](https://github.com/acomerlatto/rpc-epg/commit/221c701ce15496491e96c513c482e504f6c98bc3))
+
 ## 1.0.0 (2021-03-06)
 
 
