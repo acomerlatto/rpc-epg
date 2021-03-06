@@ -72,10 +72,8 @@ export default {
         const inicio = $this.$moment.unix(el.start_time)
         const fim = $this.$moment.unix(el.end_time)
 
-        // Filtrar os programas de hoje
         const gradeHoje = inicio.isBetween(inicioHoje, fimHoje)
-        // Filtrar o programa que iniciou antes da meia noite e termina após a meia noite
-        const noAr = agora.isBetween(inicio, fim) && agora.isSame(fim, 'day')
+        const noAr = agora.isBetween(inicio, fim) && $this.dataProgramacao.isSame(fim, 'day')
 
         return gradeHoje || noAr
       }
