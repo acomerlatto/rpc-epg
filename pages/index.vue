@@ -1,19 +1,19 @@
 <template>
   <div class="py-6">
     <div class="flex-auto justify-center items-center flex space-x-4 mb-6">
-      <button class="btn btn-rounded btn-primary-outline hidden md:flex" @click="baixarNovoGuia($moment(dataProgramacao).subtract(2, 'day'))">
+      <button class="btn btn-rounded btn-primary-outline hidden md:flex focus:outline-none" @click="baixarNovoGuia($moment(dataProgramacao).subtract(2, 'day'))">
         {{ $moment(dataProgramacao).subtract(2, 'day').format('DD/MM') }}
       </button>
-      <button class="btn btn-rounded btn-primary-outline" @click="baixarNovoGuia($moment(dataProgramacao).subtract(1, 'day'))">
+      <button class="btn btn-rounded btn-primary-outline focus:outline-none" @click="baixarNovoGuia($moment(dataProgramacao).subtract(1, 'day'))">
         {{ $moment(dataProgramacao).subtract(1, 'day').format('DD/MM') }}
       </button>
       <div class="btn btn-rounded bg-blue-900 text-white text-center">
         {{ dataProgramacao.isSame($moment(), 'date') ? 'Hoje' : dataProgramacao.format('DD/MM') }}
       </div>
-      <button class="btn btn-rounded btn-primary-outline" @click="baixarNovoGuia($moment(dataProgramacao).add(1, 'day'))">
+      <button class="btn btn-rounded btn-primary-outline focus:outline-none" @click="baixarNovoGuia($moment(dataProgramacao).add(1, 'day'))">
         {{ $moment(dataProgramacao).add(1, 'day').format('DD/MM') }}
       </button>
-      <button class="btn btn-rounded btn-primary-outline hidden md:flex" @click="baixarNovoGuia($moment(dataProgramacao).add(2, 'day'))">
+      <button class="btn btn-rounded btn-primary-outline hidden md:flex focus:outline-none" @click="baixarNovoGuia($moment(dataProgramacao).add(2, 'day'))">
         {{ $moment(dataProgramacao).add(2, 'day').format('DD/MM') }}
       </button>
     </div>
