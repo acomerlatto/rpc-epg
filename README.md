@@ -1,20 +1,13 @@
-# rpc-epg
+# RPC - EPG
 
-## Build Setup
+Projeto desenvolvido para exibir a grade de programação da RPC, afiliada a Rede Globo.
 
-```bash
-# install dependencies
-$ npm install
+-----
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+### Funcionalidades:
+- exibir a grade de programação do dia, disposta de 00:00 até 23:59;
+- destacar qual o programa está sendo exibido no momento de acesso a aplicação;
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+-----
 
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+Acesse a [Demo](https://rpc-epg-comerlatto.herokuapp.com/)
